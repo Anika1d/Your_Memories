@@ -1,4 +1,4 @@
-package com.template.ym.composable.screens
+package com.template.ym.composable.screens.initial
 
 import android.net.Uri
 import androidx.activity.result.ActivityResultLauncher
@@ -13,23 +13,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.ImageLoader
 import coil.compose.AsyncImage
 import com.template.ym.R
 import com.template.ym.composable.screens.logo.Logo
-import com.template.ym.ui.theme.BackgroundIconColor
 import com.template.ym.ui.theme.ParadisePink
 import com.template.ym.ui.theme.Saffron
-import java.io.File
 
 @Composable
 fun RegisterScreen(
     modifier: Modifier,
-    imageuri: Uri?,
+    imageUri: Uri?,
     getImageContent: ActivityResultLauncher<String>
 ) {
 
@@ -82,10 +77,10 @@ fun RegisterScreen(
                         },
                     contentAlignment = Alignment.Center
                 ) {
-                    if (imageuri == null)
+                    if (imageUri == null)
                         Text(text = "Avatar")
                     else
-                        AsyncImage(model = imageuri, contentDescription = null)
+                        AsyncImage(model = imageUri, contentDescription = null)
                 }
                 /**FirstNameField*/
                 OutlinedTextField(

@@ -1,4 +1,4 @@
-package com.template.ym.composable.screens
+package com.template.ym.composable.screens.initial
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
