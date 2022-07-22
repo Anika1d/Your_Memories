@@ -13,6 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.template.ym.composable.screens.PreviewAuthScreen
+import com.template.ym.composable.screens.PreviewRegisterScreen
+import com.template.ym.composable.screens.PreviewSigInScreen
+import com.template.ym.composable.screens.PreviewSplashScreen
 import com.template.ym.ui.theme.YMTheme
 
 class MainActivity : ComponentActivity() {
@@ -25,7 +29,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    PreviewRegisterScreen()
                 }
             }
         }
@@ -36,7 +40,7 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String) {
     Column() {
         Text(text = "Hello $name!")
-        Image(painter = painterResource(id = R.drawable.ic_logo_120), contentDescription =null)
+        Image(painter = painterResource(id = R.drawable.ic_logo_120), contentDescription = null)
     }
 }
 

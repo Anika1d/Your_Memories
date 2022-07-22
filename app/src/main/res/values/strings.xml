@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">YM</string>
+    <string name="sig_in">Войти</string>
+    <string name="register">Зарегистрироваться</string>
+    <string name="icon_name">YM_ICON</string>
+
+
+
+    <string name="first_name">Имя</string>
+    <string name="last_name">Фамилия</string>
+    <string name="login">Логин</string>
+    <string name="email">Почта</string>
+    <string name="password">Пароль</string>
+    <string name="password_copy">Повторите пароль</string>
+
 </resources>
