@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.template.ym.R
 import com.template.ym.composable.screens.logo.Logo
@@ -25,8 +26,10 @@ import com.template.ym.ui.theme.Saffron
 fun RegisterScreen(
     modifier: Modifier,
     imageUri: Uri?,
-    getImageContent: ActivityResultLauncher<String>
+    getImageContent: ActivityResultLauncher<String>,
+    navController: NavController
 ) {
+    navController.enableOnBackPressed(true)
 
     /** Values Text field*/
     val widthTextField = 0.9f

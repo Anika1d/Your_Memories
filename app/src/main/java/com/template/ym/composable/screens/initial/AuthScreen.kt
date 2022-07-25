@@ -14,13 +14,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.template.ym.R
 import com.template.ym.composable.screens.logo.Logo
 import com.template.ym.ui.theme.BackgroundIconColor
 import com.template.ym.ui.theme.ParadisePink
 
 @Composable
-fun AuthScreen(modifier: Modifier) {
+fun AuthScreen(modifier: Modifier, navController: NavHostController) {
+    navController.enableOnBackPressed(true)
+
 
     /** Values Text field*/
     var textFieldLogin by remember {
@@ -74,13 +77,14 @@ fun AuthScreen(modifier: Modifier) {
 
 }
 
-@Preview(showBackground = true)
-@Composable
-fun PreviewAuthScreen() {
-    AuthScreen(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(BackgroundIconColor)
-            .padding(4.dp)
-    )
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun PreviewAuthScreen() {
+//    AuthScreen(
+//        modifier = Modifier
+//            .fillMaxSize()
+//            .background(BackgroundIconColor)
+//            .padding(4.dp),
+//        navController = navController
+//    )
+//}

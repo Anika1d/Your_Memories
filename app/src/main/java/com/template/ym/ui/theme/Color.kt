@@ -19,3 +19,13 @@ val RoyalPurple = Color(0xFF724e91)
 val ParadisePink = Color(0xFFe54f6d)
 val Saffron = Color(0xFFF8C630)
 val BackgroundIconColor=Color(0xFF5331B4)
+
+
+val DarkPrimaryColor = Color(0xff0288D1)
+val DefaultPrimaryColor = Color(0xFF03A9F4)
+val LightPrimaryColor = Color(0xFFB3E5FC)
+val TextPrimaryColor = Color(0xFFFFFFFF)
+val AccentColor = Color(0xFF7C4DFF)
+val PrimaryTextColor = Color(0xFF212121)
+val SecondaryTextColor = Color(0xFF757575)
+val DividerColor = Color(0xffBDBDBD)
