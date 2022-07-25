@@ -12,5 +12,8 @@
     <string name="email">Почта</string>
     <string name="password">Пароль</string>
     <string name="password_copy">Повторите пароль</string>
+    <string name="settings">Настройки</string>
+    <string name="exit">Выход</string>
+    <string name="create_memories">Запечатлить</string>
 
 </resources>
