@@ -1,25 +1,29 @@
 package com.template.ym.composable.screens.initial
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.template.ym.R
 import com.template.ym.composable.navigation.Route
 import com.template.ym.composable.screens.logo.Logo
-import com.template.ym.ui.theme.BackgroundIconColor
+import com.template.ym.composable.tools.StdOutLinedTextField
 import com.template.ym.ui.theme.ParadisePink
+import com.template.ym.ui.theme.TextPrimaryColor
 
 @Composable
 fun AuthScreen(modifier: Modifier, navController: NavHostController) {
@@ -27,13 +31,12 @@ fun AuthScreen(modifier: Modifier, navController: NavHostController) {
 
 
     /** Values Text field*/
-    var textFieldLogin by remember {
-        mutableStateOf("Логин")
-    }
-    var textFieldPassword by remember {
-        mutableStateOf("Пароль")
-    }
-
+//    var textFieldEmail by remember {
+//        mutableStateOf("")
+//    }
+//    var textFieldPassword by remember {
+//        mutableStateOf("")
+//    }
 
 
 
@@ -47,28 +50,21 @@ fun AuthScreen(modifier: Modifier, navController: NavHostController) {
                 .padding(end = 90.dp)
         )
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            OutlinedTextField(
-                value = textFieldLogin,
-                maxLines = 1,
-                colors = TextFieldDefaults.textFieldColors(
-                    textColor = Color.White,
-                    containerColor = Color.Transparent
-                ),
-                onValueChange = { textFieldLogin = it.take(25) })
-            OutlinedTextField(
-                value = textFieldPassword,
-                maxLines = 1,
-                colors = TextFieldDefaults.textFieldColors(
-                    textColor = Color.White,
-                    containerColor = Color.Transparent
-                ),
-                onValueChange = { textFieldPassword = it.take(25) })
+            StdOutLinedTextField(
+                title = "Email",
+                keyboardType = KeyboardType.Email
+            )
+            StdOutLinedTextField(
+                title = "Password",
+                keyboardType = KeyboardType.Password,
+                imeAction = ImeAction.Done
+            )
         }
         Button(
             onClick = { navController.navigate(Route.ProfileScreen.route) },
             colors = ButtonDefaults.buttonColors(
                 containerColor = ParadisePink,
-                contentColor = Color.White
+                contentColor = TextPrimaryColor
             ),
             shape = RoundedCornerShape(10f),
         ) {

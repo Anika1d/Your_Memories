@@ -7,6 +7,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -14,14 +15,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.template.ym.R
 import com.template.ym.composable.navigation.Route
 import com.template.ym.composable.screens.logo.Logo
+import com.template.ym.composable.tools.StdOutLinedTextField
 import com.template.ym.ui.theme.ParadisePink
 import com.template.ym.ui.theme.Saffron
+import com.template.ym.ui.theme.TextPrimaryColor
 
 @Composable
 fun RegisterScreen(
@@ -34,27 +39,25 @@ fun RegisterScreen(
 
     /** Values Text field*/
     val widthTextField = 0.9f
-    var textFieldLogin by remember {
-        mutableStateOf("Логин")
-    }
-    var textFieldPassword by remember {
-        mutableStateOf("Пароль")
-    }
-    var textFieldPasswordCopy by remember {
-        mutableStateOf("Повторите Пароль")
-    }
-    var textFieldFirstName by remember {
-        mutableStateOf("Имя")
-    }
-    var textFieldLastName by remember {
-        mutableStateOf("Фамилия")
-    }
-    var textFieldEmail by remember {
-        mutableStateOf("Почта")
-    }
-
-
-
+//    var textFieldLogin by remember {
+//        mutableStateOf("Логин")
+//    }
+//    var textFieldPassword by remember {
+//        mutableStateOf("Пароль")
+//    }
+//    var textFieldPasswordCopy by remember {
+//        mutableStateOf("Повторите Пароль")
+//    }
+//    var textFieldFirstName by remember {
+//        mutableStateOf("Имя")
+//    }
+//    var textFieldLastName by remember {
+//        mutableStateOf("Фамилия")
+//    }
+//    var textFieldEmail by remember {
+//        mutableStateOf("Почта")
+//    }
+//
 
 
     LazyColumn(
@@ -87,71 +90,33 @@ fun RegisterScreen(
                         AsyncImage(model = imageUri, contentDescription = null)
                 }
                 /**FirstNameField*/
-                OutlinedTextField(
-                    modifier = Modifier.fillMaxWidth(widthTextField),
-                    value = textFieldFirstName,
-                    maxLines = 1,
-                    colors = TextFieldDefaults.textFieldColors(
-                        textColor = Color.White,
-                        containerColor = Color.Transparent
-                    ),
-                    onValueChange = { textFieldFirstName = it.take(25) })
+                StdOutLinedTextField(title = "First Name")
                 /**LastNameField*/
-                OutlinedTextField(
-                    modifier = Modifier.fillMaxWidth(widthTextField),
-                    value = textFieldLastName,
-                    maxLines = 1,
-                    colors = TextFieldDefaults.textFieldColors(
-                        textColor = Color.White,
-                        containerColor = Color.Transparent
-                    ),
-                    onValueChange = { textFieldLastName = it.take(25) })
+                StdOutLinedTextField(title = "Last Name")
                 /**LoginField*/
-                OutlinedTextField(
-                    modifier = Modifier.fillMaxWidth(widthTextField),
-                    value = textFieldLogin,
-                    maxLines = 1,
-                    colors = TextFieldDefaults.textFieldColors(
-                        textColor = Color.White,
-                        containerColor = Color.Transparent
-                    ),
-                    onValueChange = { textFieldLogin = it.take(25) })
+                StdOutLinedTextField(title = "Login")
                 /**EmailField*/
-                OutlinedTextField(
-                    modifier = Modifier.fillMaxWidth(widthTextField),
-                    value = textFieldPasswordCopy,
-                    maxLines = 1,
-                    colors = TextFieldDefaults.textFieldColors(
-                        textColor = Color.White,
-                        containerColor = Color.Transparent
-                    ),
-                    onValueChange = { textFieldPasswordCopy = it.take(25) })
+                StdOutLinedTextField(
+                    title = "Email",
+                    keyboardType = KeyboardType.Email
+                )
                 /**PasswordField*/
-                OutlinedTextField(
-                    modifier = Modifier.fillMaxWidth(widthTextField),
-                    value = textFieldPassword,
-                    maxLines = 1,
-                    colors = TextFieldDefaults.textFieldColors(
-                        textColor = Color.White,
-                        containerColor = Color.Transparent
-                    ),
-                    onValueChange = { textFieldPassword = it.take(25) })
+                StdOutLinedTextField(
+                    title = "Password",
+                    keyboardType = KeyboardType.Password
+                )
                 /**PasswordCopyField*/
-                OutlinedTextField(
-                    modifier = Modifier.fillMaxWidth(widthTextField),
-                    value = textFieldEmail,
-                    maxLines = 1,
-                    colors = TextFieldDefaults.textFieldColors(
-                        textColor = Color.White,
-                        containerColor = Color.Transparent
-                    ),
-                    onValueChange = { textFieldEmail = it.take(25) })
+                StdOutLinedTextField(
+                    title = "Repeat Password",
+                    keyboardType = KeyboardType.Password,
+                    imeAction = ImeAction.Done
+                )
                 Button(
                     modifier = Modifier.fillMaxWidth(widthTextField),
                     onClick = { navController.navigate(Route.AuthScreen.route) },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = ParadisePink,
-                        contentColor = Color.White
+                        contentColor = TextPrimaryColor
                     ),
                     shape = RoundedCornerShape(10f),
                 ) {
