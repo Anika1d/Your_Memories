@@ -1,49 +1,36 @@
 package com.template.ym
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.runtime.mutableStateOf
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import com.template.ym.composable.navigation.ScreenNavigation
 import com.template.ym.ui.theme.YMTheme
 
+@OptIn(ExperimentalAnimationApi::class)
 class MainActivity : ComponentActivity() {
+
+    val imageUriState = mutableStateOf<Uri?>(null)
+    val getImageContent =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            imageUriState.value = uri
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val navController = rememberAnimatedNavController()
+
             YMTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
+                ScreenNavigation(
+                    navController = navController,
+                    imageUri = imageUriState.value,
+                    getImageContent = getImageContent)
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Column() {
-        Text(text = "Hello $name!")
-        Image(painter = painterResource(id = R.drawable.ic_logo_120), contentDescription =null)
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    YMTheme {
-        Greeting("Android")
     }
 }
