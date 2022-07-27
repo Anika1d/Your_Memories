@@ -3,6 +3,7 @@ package com.template.ym.composable.screens.profile
 import android.content.res.Resources
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -20,7 +21,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -29,6 +29,7 @@ import com.template.ym.R
 import com.template.ym.composable.navigation.Route
 import com.template.ym.composable.screens.bar.BottomBar
 import com.template.ym.composable.screens.bar.Toolbar
+import com.template.ym.composable.screens.memories.modeopenscreen.ModeOpenScreen
 import com.template.ym.ui.theme.*
 
 @Composable
@@ -38,19 +39,25 @@ fun ProfileScreen(modifier: Modifier, navController: NavHostController) {
         Toolbar(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(40.dp), title = "Андрей Петров"
-        ) {
-            DropdownMenuItem(text = { Text(text = "ID") }, onClick = { /*TODO*/ })
-            DropdownMenuItem(text = { Text(text = "QR") }, onClick = { /*TODO*/ })
-            DropdownMenuItem(
-                text = { Text(text = stringResource(id = R.string.settings)) },
-                onClick = { /*TODO*/ })
-            /**TODO В будущем проверка на свой профиль if ()*/
-            Divider()
-            DropdownMenuItem(
-                text = { Text(text = stringResource(id = R.string.exit)) },
-                onClick = { navController.navigate(Route.SigInScreen.route) })
-        }
+                .height(40.dp),
+            title = "Андрей Петров",
+            navController,
+            false, ///if тут будет проверка можно ли вернуться пока нет, тк нет друзей
+            contentDropDownMenu = {
+                DropdownMenuItem(text = { Text(text = "QR/ID") }, onClick = { /*TODO*/ })
+                DropdownMenuItem(
+                    text = { Text(text = "Memories") },
+                    onClick = { navController.navigate(Route.ListMemoriesScreen.route) })
+                DropdownMenuItem(
+                    text = { Text(text = stringResource(id = R.string.settings)) },
+                    onClick = { /*TODO*/ })
+                /**TODO В будущем проверка на свой профиль if ()*/
+                Divider()
+                DropdownMenuItem(
+                    text = { Text(text = stringResource(id = R.string.exit)) },
+                    onClick = { navController.navigate(Route.SigInScreen.route) })
+            },
+        )
         Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
 
             Row(
@@ -82,7 +89,7 @@ fun ProfileScreen(modifier: Modifier, navController: NavHostController) {
 //        }
             /*else*/    Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly,
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
             verticalAlignment = Alignment.CenterVertically,
             content = {
                 TextButton(
@@ -169,7 +176,8 @@ fun ProfileScreen(modifier: Modifier, navController: NavHostController) {
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .fillMaxHeight()
-                                    .border(4.dp, color = Saffron)
+                                    .border(4.dp, color = Saffron),
+                                navController = navController
                             )
                         }
                     })
@@ -183,15 +191,17 @@ fun ProfileScreen(modifier: Modifier, navController: NavHostController) {
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .fillMaxHeight()
-                                .border(4.dp, color = Saffron)
-
+                                .border(4.dp, color = Saffron),
+                            navController = navController
                         )
                     }
                 })
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter)
             {
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        navController.navigate(Route.ChangeOrCreateMemoriesScreen.route + ModeOpenScreen.Create.mode)
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = ParadisePink,
                         contentColor = Color.White
@@ -214,8 +224,10 @@ fun ProfileScreen(modifier: Modifier, navController: NavHostController) {
 }
 
 @Composable
-fun ItemsMemory(modifier: Modifier) {
-    Box(modifier = modifier, contentAlignment = Alignment.TopCenter) {
+fun ItemsMemory(modifier: Modifier, navController: NavHostController) {
+    Box(modifier = modifier.clickable {
+        navController.navigate(Route.InfoMemoriesScreen.route)
+    }, contentAlignment = Alignment.TopCenter) {
 
         AsyncImage(
             model = R.drawable.tmp_foto_memory,
