@@ -19,6 +19,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.template.ym.R
+import com.template.ym.composable.navigation.Route
 import com.template.ym.composable.screens.logo.Logo
 import com.template.ym.composable.tools.StdOutLinedTextField
 import com.template.ym.ui.theme.ParadisePink
@@ -60,7 +61,7 @@ fun AuthScreen(modifier: Modifier, navController: NavHostController) {
             )
         }
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate(Route.ProfileScreen.route) },
             colors = ButtonDefaults.buttonColors(
                 containerColor = ParadisePink,
                 contentColor = TextPrimaryColor

@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.template.ym.R
+import com.template.ym.composable.navigation.Route
 import com.template.ym.composable.screens.logo.Logo
 import com.template.ym.composable.tools.StdOutLinedTextField
 import com.template.ym.ui.theme.ParadisePink
@@ -112,7 +113,7 @@ fun RegisterScreen(
                 )
                 Button(
                     modifier = Modifier.fillMaxWidth(widthTextField),
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate(Route.AuthScreen.route) },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = ParadisePink,
                         contentColor = TextPrimaryColor

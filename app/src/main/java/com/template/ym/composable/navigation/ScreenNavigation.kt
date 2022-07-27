@@ -12,6 +12,7 @@ import com.template.ym.composable.screens.initial.AuthScreen
 import com.template.ym.composable.screens.initial.RegisterScreen
 import com.template.ym.composable.screens.initial.SigInScreen
 import com.template.ym.composable.screens.initial.SplashScreen
+import com.template.ym.composable.screens.profile.ProfileScreen
 import com.template.ym.composable.tools.stdModifier
 
 @Suppress("OPT_IN_IS_NOT_ENABLED")
@@ -51,6 +52,12 @@ fun ScreenNavigation(
                 navController = navController,
             )
         }
+        composable(route = Route.ProfileScreen.route) {
+            ProfileScreen(
+                modifier = stdModifier(h = 0.94f),
+                navController = navController,
+            )
+        }
     }
 }
 
@@ -59,5 +66,6 @@ sealed class Route(val route: String) {
     object AuthScreen : Route("auth_screen")
     object SigInScreen : Route("sig_in_screen")
     object SplashScreen : Route("splash_screen")
+    object ProfileScreen : Route("profile_screen")
 
 }
