@@ -2,6 +2,7 @@ package com.template.ym.composable.tools
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -20,7 +21,6 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.template.ym.R
 import com.template.ym.ui.theme.BackgroundIconColor
-import com.template.ym.ui.theme.PrimaryTextColor
 import com.template.ym.ui.theme.TextPrimaryColor
 
 
@@ -56,7 +56,7 @@ fun StdOutLinedTextField(
         label = {
             Text(title, color = TextPrimaryColor)
         },
-        onValueChange = { valueOut += it[it.length - 1] },
+        onValueChange = { valueOut = it},
         colors = TextFieldDefaults.outlinedTextFieldColors(
             textColor = TextPrimaryColor,
             containerColor = Color.Transparent,
