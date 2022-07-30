@@ -24,14 +24,11 @@ import androidx.navigation.NavHostController
 fun Toolbar(
     modifier: Modifier,
     title: String,
-    navController: NavHostController,
-    back_flag: Boolean,
+    navigationIcon:@Composable() () -> Unit,
     contentDropDownMenu: @Composable() (ColumnScope.() -> Unit),
 ) {
-    var backPressed by remember {
-        mutableStateOf(0L)
-    }
-    val context = LocalContext.current
+
+
     var expanded by remember { mutableStateOf(false) }
     val weightScreen = Resources.getSystem().displayMetrics.widthPixels
     Scaffold(
@@ -55,25 +52,7 @@ fun Toolbar(
                             )
                         })
                 },
-                navigationIcon = {
-                    IconButton(onClick = {
-                        if (back_flag ||
-                            backPressed + 2000 > System.currentTimeMillis()
-                        ) navController.navigateUp()
-                        else {
-                            Toast.makeText(context, "Press again to exit", Toast.LENGTH_LONG).show()
-                            backPressed = System.currentTimeMillis()
-
-                        }
-                    }) {
-                        Icon(
-                            imageVector = Icons.Default.ArrowBack,
-                            modifier = Modifier.fillMaxHeight(),
-                            contentDescription = "arrow_back",
-                            tint = Color.White
-                        )
-                    }
-                },
+                navigationIcon = navigationIcon ,
                 actions = {
                     IconButton(onClick = { expanded = true }) {
                         Icon(
