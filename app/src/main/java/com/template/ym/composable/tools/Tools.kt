@@ -1,6 +1,7 @@
 package com.template.ym.composable.tools
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -24,9 +25,10 @@ import com.template.ym.ui.theme.BackgroundIconColor
 import com.template.ym.ui.theme.TextPrimaryColor
 
 
-fun stdModifier(): Modifier {
-  return  Modifier
-        .fillMaxSize()
+fun stdModifier(h: Float = 1f, w: Float = 1f): Modifier {
+    return Modifier
+        .fillMaxHeight(h)
+        .fillMaxWidth(w)
         .background(BackgroundIconColor)
         .padding(4.dp)
 }
@@ -56,7 +58,7 @@ fun StdOutLinedTextField(
         label = {
             Text(title, color = TextPrimaryColor)
         },
-        onValueChange = { valueOut = it},
+        onValueChange = { valueOut = it },
         colors = TextFieldDefaults.outlinedTextFieldColors(
             textColor = TextPrimaryColor,
             containerColor = Color.Transparent,
