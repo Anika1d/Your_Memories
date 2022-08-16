@@ -55,47 +55,65 @@ fun ScreenNavigation(
                 navController = navController,
             )
         }
-        composable(route = Route.ProfileScreen.route) {
+        composable(
+            route = Route.ProfileScreen.route + "{id}",
+            arguments = listOf(navArgument("id") { type = NavType.LongType })
+        ) { bundle ->
+            val id = bundle.arguments?.getLong("id")!!
             ProfileScreen(
                 modifier = stdModifier(h = 0.94f),
                 navController = navController,
+                id = id
             )
         }
-        composable(route = Route.InfoMemoriesScreen.route) {
+
+        composable(
+            route = Route.InfoMemoriesScreen.route + "{id}",
+            arguments = listOf(navArgument("id") { type = NavType.LongType })
+        ) { bundle ->
+            val arg = bundle.arguments?.getLong("id")!!
             InfoMemories(
                 modifier = stdModifier(0.94f),
-                navController = navController
+                navController = navController,
+                idMemories = arg,
             )
         }
-        composable(route = Route.ListMemoriesScreen.route) {
-            ListMemories(modifier = stdModifier(0.94f), navController = navController)
+
+
+        composable(
+            route = Route.ListMemoriesScreen.route + "{id}",
+            arguments = listOf(navArgument("id") { type = NavType.LongType })
+        ) { bundle ->
+            val id = bundle.arguments?.getLong("id")!!
+            ListMemories(
+                modifier = stdModifier(0.94f), navController = navController,
+                idOwner = id
+            )
         }
 
         composable(
             route = Route.ChangeOrCreateMemoriesScreen.route + "{mode}",
             arguments = listOf(navArgument("mode") { type = NavType.StringType })
         ) { bundle ->
+            val arg = bundle.arguments?.getString("mode") ?: "create"
+            var tmpId: Long? = null
+            var mode: String = arg
+            if (arg != "create") {
+                mode = arg.split(':')[0]
+                tmpId = arg.split(':')[1].toLong()
+            }
             ChangeOrCreateMemories(
                 modifier = stdModifier(0.94f),
                 imageUri = imageUri,
                 getImageContent = getImageContent,
                 navController = navController,
-                modeScreen = bundle.arguments?.getString("mode") ?: "create"
+                modeScreen = mode,
+                idMemories = tmpId
             )
         }
 
     }
 }
-
-//fun NavGraphBuilder.memoriesGraph(navController: NavController) {
-//    navigation(startDestination = "username", route = "login") {
-//        composable(Route.InfoMemoriesScreen.route) { ... }
-//        composable(Route.ListMemoriesScreen.route) { ... }
-//        composable(Route.ChangeOrCreateMemoriesScreen.route + "mode") {
-//
-//        }
-//    }
-//}
 
 sealed class Route(val route: String) {
     object RegisterScreen : Route("register_screen/")
